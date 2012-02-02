@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Rude 8 Ball</string>
+    <string name="tellbutton">Svin mig</string>
+    <string name="you_are">Du er en:</string>
+    <string name="sviner"></string>
+
+</resources>
