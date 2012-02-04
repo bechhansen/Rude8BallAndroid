@@ -11,14 +11,17 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
 
-public class CrapNameTask extends AsyncTask<String, Integer, String> {
+public class CrapNameTask extends AsyncTask<Void, Integer, String> {
 
-	protected String doInBackground(String... urls) {
+	private String url = "http://crapname-bech.rhcloud.com/rs/crapname/generator";
 
-		HttpClient httpclient = new DefaultHttpClient();
-		HttpGet request = new HttpGet(urls[0]);
+	HttpClient httpclient = new DefaultHttpClient();
+	HttpGet request = new HttpGet(url);
 
-		ResponseHandler<String> handler = new BasicResponseHandler();
+	ResponseHandler<String> handler = new BasicResponseHandler();
+
+	protected String doInBackground(Void... urls) {
+
 		try {
 			return httpclient.execute(request, handler);
 		} catch (ClientProtocolException e) {
@@ -27,9 +30,8 @@ public class CrapNameTask extends AsyncTask<String, Integer, String> {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
-		return "";
+		return null;
 	}
 
 	protected void onProgressUpdate(Integer... progress) {
