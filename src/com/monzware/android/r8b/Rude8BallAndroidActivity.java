@@ -127,7 +127,7 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 
 			runOnUiThread(new Runnable() {
 				public void run() {
-					Toast.makeText(getApplicationContext(), "The rude 8 ball can realy not be bothered at this time!", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "The rude 8 ball can really not be bothered at this time!", Toast.LENGTH_LONG).show();
 				}
 			});
 		}

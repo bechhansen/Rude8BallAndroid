@@ -1,32 +1,18 @@
 package com.monzware.android.r8b;
 
-import java.util.concurrent.ExecutionException;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.hardware.SensorManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Spinner;
 
-public class Rude8BallSetupActivity extends Activity implements ShakeListener, ExtendableTimerListener {
+public class Rude8BallSetupActivity extends Activity {
 
-	private SensorManager sensorMgr;
-
-	private ExtendableTimer timer = new ExtendableTimer(2000, 250, 250);
-
-	private TextView tv = null;
-	private ImageView button = null;
-
-	private String rudeComment;
+	private static final String PREFS_NAME = "Setup";
+	private static final String LANGUAGE = "Language";
 
 	/** Called when the activity is first created. */
 	@Override
@@ -45,90 +31,28 @@ public class Rude8BallSetupActivity extends Activity implements ShakeListener, E
 
 		});
 
-	}
+		// Restore preferences
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		int lang = settings.getInt(LANGUAGE, 0);
 
-	@Override
-	public void shaking() {
-		timer.schedue();
-	}
-
-	@Override
-	public void timerStarted() {
-
-		tv.post(new Runnable() {
-
-			@Override
-			public void run() {
-				tv.setText("You are a...");
-			}
-		});
-
-		try {
-			CrapNameTask crapNameTask = new CrapNameTask();
-			AsyncTask<Void, Integer, String> execute = crapNameTask.execute();
-			rudeComment = execute.get();
-		} catch (InterruptedException e) {
-
-		} catch (ExecutionException e) {
-
-		}
-
-		shakeAnimation();
+		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+		spinner.setSelection(lang);
 
 	}
 
-	@Override
-	public void timerTick() {
-		shakeAnimation();
-	}
+	protected void onStop() {
+		super.onStop();
 
-	@Override
-	public void timerDone() {
-		setSviner();
-	}
+		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+		int pos = spinner.getSelectedItemPosition();
 
-	private void setSviner() {
+		// We need an Editor object to make preference changes.
+		// All objects are from android.context.Context
+		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt(LANGUAGE, pos);
 
-		if (rudeComment != null) {
-
-			tv.post(new Runnable() {
-
-				@Override
-				public void run() {
-					tv.setText(rudeComment);
-				}
-			});
-
-		} else {
-
-			runOnUiThread(new Runnable() {
-				public void run() {
-					Toast.makeText(getApplicationContext(), "The 8 ball can not be bothered at this time", Toast.LENGTH_LONG).show();
-				}
-			});
-		}
-
-	}
-
-	private void shakeAnimation() {
-
-		button.post(new Runnable() {
-
-			@Override
-			public void run() {
-				int currentRotation = 0;
-
-				RotateAnimation anim = new RotateAnimation(currentRotation, currentRotation + 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-				currentRotation = (currentRotation + 30) % 360;
-
-				anim.setInterpolator(new LinearInterpolator());
-				anim.setDuration(250);
-				anim.setFillEnabled(true);
-
-				anim.setFillAfter(true);
-				button.startAnimation(anim);
-
-			}
-		});
+		// Commit the edits!
+		editor.commit();
 	}
 }
