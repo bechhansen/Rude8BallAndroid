@@ -5,7 +5,6 @@ import java.util.concurrent.ExecutionException;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,11 +12,12 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Rude8BallAndroidActivity extends Activity implements ShakeListener, ExtendableTimerListener {
+public class Rude8BallSetupActivity extends Activity implements ShakeListener, ExtendableTimerListener {
 
 	private SensorManager sensorMgr;
 
@@ -26,8 +26,6 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 	private TextView tv = null;
 	private ImageView button = null;
 
-	ShakeDetector sd = new ShakeDetector();
-
 	private String rudeComment;
 
 	/** Called when the activity is first created. */
@@ -35,36 +33,14 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		setContentView(R.layout.main);
+		setContentView(R.layout.setup);
 
-		tv = (TextView) findViewById(R.id.textView1);
-		button = (ImageView) findViewById(R.id.imageView1);
-
-		timer.addExtendableTimerListener(this);
-
-		sd.addShakeListener(this);
-
-		// start motion detection
-		sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
-
-		Sensor mAccelerometer = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-		boolean accelSupported = sensorMgr.registerListener(sd, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-
-		if (!accelSupported) {
-			sensorMgr.unregisterListener(sd);
-		}
-
-		button.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				timer.schedue();
-			}
-		});
-
-		ImageView next = (ImageView) findViewById(R.id.imageView3);
+		ImageView next = (ImageView) findViewById(R.id.imageView5);
 		next.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View view) {
-				Intent myIntent = new Intent(view.getContext(), Rude8BallSetupActivity.class);
-				startActivityForResult(myIntent, 0);
+				Intent intent = new Intent();
+				setResult(RESULT_OK, intent);
+				finish();
 			}
 
 		});
@@ -127,7 +103,7 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 
 			runOnUiThread(new Runnable() {
 				public void run() {
-					Toast.makeText(getApplicationContext(), "The rude 8 ball can realy not be bothered at this time!", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "The 8 ball can not be bothered at this time", Toast.LENGTH_LONG).show();
 				}
 			});
 		}
@@ -155,28 +131,4 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 			}
 		});
 	}
-
-	@Override
-	public void finish() {
-		sensorMgr.unregisterListener(sd);
-		super.finish();
-	}
-
-	@Override
-	protected void onPause() {
-		sensorMgr.unregisterListener(sd);
-		super.onPause();
-	}
-
-	@Override
-	protected void onResume() {
-		Sensor mAccelerometer = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-		boolean accelSupported = sensorMgr.registerListener(sd, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-
-		if (!accelSupported) {
-			sensorMgr.unregisterListener(sd);
-		}
-		super.onResume();
-	}
-
 }

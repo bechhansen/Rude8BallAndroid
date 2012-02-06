@@ -8,28 +8,34 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpProtocolParams;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class CrapNameTask extends AsyncTask<Void, Integer, String> {
 
 	private String url = "http://crapname-bech.rhcloud.com/rs/crapname/generator";
 
-	HttpClient httpclient = new DefaultHttpClient();
-	HttpGet request = new HttpGet(url);
+	private HttpClient httpclient = new DefaultHttpClient();
+	private HttpGet request = new HttpGet(url);
 
-	ResponseHandler<String> handler = new BasicResponseHandler();
+	private ResponseHandler<String> handler = new BasicResponseHandler();
+
+	public CrapNameTask() {
+		HttpProtocolParams.setUserAgent(httpclient.getParams(), "Rude8BallAndroid");
+	}
 
 	protected String doInBackground(Void... urls) {
 
 		try {
 			return httpclient.execute(request, handler);
 		} catch (ClientProtocolException e) {
-			e.printStackTrace();
+			Log.e("CrapNameTask", e.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e("CrapNameTask", e.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.e("CrapNameTask", e.getMessage());
 		}
 		return null;
 	}
