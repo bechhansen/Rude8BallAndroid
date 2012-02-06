@@ -22,8 +22,10 @@ public class CrapNameTask extends AsyncTask<Void, Integer, String> {
 
 	private ResponseHandler<String> handler = new BasicResponseHandler();
 
-	public CrapNameTask() {
+	public CrapNameTask(String str) {
+
 		HttpProtocolParams.setUserAgent(httpclient.getParams(), "Rude8BallAndroid");
+		request.setHeader("Accept-Language", str);
 	}
 
 	protected String doInBackground(Void... urls) {

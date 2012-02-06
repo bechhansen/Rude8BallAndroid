@@ -7,9 +7,9 @@
     <color name="black">#000000</color>
 
     <string name="rudeText"></string>
-    <string name="language_text">Language</string>
+    <string name="language_text">Sprog</string>
     <string name="creditText">Credits:</string>
-    <string name="unableToServe">The rude 8 ball can really not be bothered at this time!</string>
-    <string name="waitingToServe">You are a…</string>
+    <string name="unableToServe">The rude 8 ball kan virkelige ikke tage sig af din anmodning nu!</string>
+    <string name="waitingToServe">Du er en…</string>
 
 </resources>

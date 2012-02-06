@@ -50,5 +50,7 @@ public final class R {
         public static final int creditText=0x7f050003;
         public static final int language_text=0x7f050002;
         public static final int rudeText=0x7f050001;
+        public static final int unableToServe=0x7f050004;
+        public static final int waitingToServe=0x7f050005;
     }
 }

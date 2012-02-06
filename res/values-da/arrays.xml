@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="languages">
+        <item>Dansk</item>
+        <item>Engelsk</item>
+        <item>Tysk</item>
+    </array>
+
+</resources>

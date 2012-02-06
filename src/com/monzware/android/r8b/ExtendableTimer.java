@@ -20,7 +20,6 @@ public class ExtendableTimer implements Runnable {
 	private int tickRestTime;
 
 	private final int accuracy;
-	
 
 	public ExtendableTimer(int delay, int tick, int accuracy) {
 		this.delay = delay;
@@ -37,7 +36,7 @@ public class ExtendableTimer implements Runnable {
 		synchronized (timeThread) {
 
 			restTime = delay;
-			//tickRestTime = tick;
+			// tickRestTime = tick;
 
 			if (!timeThread.isAlive()) {
 				timeThread.start();

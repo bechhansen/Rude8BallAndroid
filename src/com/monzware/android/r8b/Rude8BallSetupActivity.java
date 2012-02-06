@@ -11,9 +11,6 @@ import android.widget.Spinner;
 
 public class Rude8BallSetupActivity extends Activity {
 
-	private static final String PREFS_NAME = "Setup";
-	private static final String LANGUAGE = "Language";
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,8 +29,8 @@ public class Rude8BallSetupActivity extends Activity {
 		});
 
 		// Restore preferences
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-		int lang = settings.getInt(LANGUAGE, 0);
+		SharedPreferences settings = getSharedPreferences(ConfigurationConstants.PREFS_NAME, 0);
+		int lang = settings.getInt(ConfigurationConstants.LANGUAGE, 0);
 
 		Spinner spinner = (Spinner) findViewById(R.id.spinner1);
 		spinner.setSelection(lang);
@@ -48,9 +45,9 @@ public class Rude8BallSetupActivity extends Activity {
 
 		// We need an Editor object to make preference changes.
 		// All objects are from android.context.Context
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences settings = getSharedPreferences(ConfigurationConstants.PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
-		editor.putInt(LANGUAGE, pos);
+		editor.putInt(ConfigurationConstants.LANGUAGE, pos);
 
 		// Commit the edits!
 		editor.commit();

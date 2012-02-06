@@ -4,6 +4,7 @@ import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -83,12 +84,14 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 
 			@Override
 			public void run() {
-				tv.setText("You are a...");
+				tv.setText(R.string.waitingToServe);
 			}
 		});
 
 		try {
-			CrapNameTask crapNameTask = new CrapNameTask();
+			SharedPreferences settings = getSharedPreferences(ConfigurationConstants.PREFS_NAME, 0);
+			String str = ConfigurationConstants.getLanguageString(settings.getInt(ConfigurationConstants.LANGUAGE, 0));
+			CrapNameTask crapNameTask = new CrapNameTask(str);
 			AsyncTask<Void, Integer, String> execute = crapNameTask.execute();
 			rudeComment = execute.get();
 		} catch (InterruptedException e) {
@@ -127,7 +130,7 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 
 			runOnUiThread(new Runnable() {
 				public void run() {
-					Toast.makeText(getApplicationContext(), "The rude 8 ball can really not be bothered at this time!", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), R.string.unableToServe, Toast.LENGTH_LONG).show();
 				}
 			});
 		}
