@@ -11,7 +11,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpProtocolParams;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class CrapNameTask extends AsyncTask<Void, Integer, String> {
 
@@ -33,11 +32,11 @@ public class CrapNameTask extends AsyncTask<Void, Integer, String> {
 		try {
 			return httpclient.execute(request, handler);
 		} catch (ClientProtocolException e) {
-			Log.e("CrapNameTask", e.getMessage());
+
 		} catch (IOException e) {
-			Log.e("CrapNameTask", e.getMessage());
+
 		} catch (Exception e) {
-			Log.e("CrapNameTask", e.getMessage());
+
 		}
 		return null;
 	}

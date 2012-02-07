@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-import android.util.Log;
-
 public class ExtendableTimer implements Runnable {
 
 	private Collection<ExtendableTimerListener> list = Collections.synchronizedList(new ArrayList<ExtendableTimerListener>());
@@ -49,21 +47,18 @@ public class ExtendableTimer implements Runnable {
 	}
 
 	private void notifyStart() {
-		Log.d(this.getClass().getName(), "NotifyStart");
 		for (ExtendableTimerListener l : list) {
 			l.timerStarted();
 		}
 	}
 
 	private void notifyTick() {
-		Log.d(this.getClass().getName(), "NotifyTick");
 		for (ExtendableTimerListener l : list) {
 			l.timerTick();
 		}
 	}
 
 	private void notifyDone() {
-		Log.d(this.getClass().getName(), "NotifyDone");
 		for (ExtendableTimerListener l : list) {
 			l.timerDone();
 		}
