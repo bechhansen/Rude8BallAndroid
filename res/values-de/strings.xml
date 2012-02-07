@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Rude 8 Ball</string>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <string name="rudeText"></string>
+    <string name="language_text">Sprache</string>
+    <string name="creditText">Credits:</string>
+    <string name="unableToServe">The rude 8 ball can really not be bothered at this time!</string>
+    <string name="waitingToServe">Sie sind ein…</string>    
+
+</resources>
