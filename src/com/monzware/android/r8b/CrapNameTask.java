@@ -27,6 +27,7 @@ public class CrapNameTask extends AsyncTask<Void, Integer, String> {
 		request.setHeader("Accept-Language", str);
 	}
 
+	@Override
 	protected String doInBackground(Void... urls) {
 
 		try {
@@ -41,6 +42,7 @@ public class CrapNameTask extends AsyncTask<Void, Integer, String> {
 		return null;
 	}
 
+	@Override
 	protected void onProgressUpdate(Integer... progress) {
 
 	}

@@ -56,6 +56,7 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 		}
 
 		button.setOnClickListener(new View.OnClickListener() {
+			@Override
 			public void onClick(View v) {
 				timer.schedue();
 			}
@@ -63,6 +64,7 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 
 		ImageView next = (ImageView) findViewById(R.id.imageView3);
 		next.setOnClickListener(new View.OnClickListener() {
+			@Override
 			public void onClick(View view) {
 				Intent myIntent = new Intent(view.getContext(), Rude8BallSetupActivity.class);
 				startActivityForResult(myIntent, 0);
@@ -129,6 +131,7 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 		} else {
 
 			runOnUiThread(new Runnable() {
+				@Override
 				public void run() {
 					Toast.makeText(getApplicationContext(), R.string.unableToServe, Toast.LENGTH_LONG).show();
 				}

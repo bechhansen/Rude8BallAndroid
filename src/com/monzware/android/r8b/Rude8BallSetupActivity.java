@@ -20,6 +20,7 @@ public class Rude8BallSetupActivity extends Activity {
 
 		ImageView next = (ImageView) findViewById(R.id.imageView5);
 		next.setOnClickListener(new View.OnClickListener() {
+			@Override
 			public void onClick(View view) {
 				Intent intent = new Intent();
 				setResult(RESULT_OK, intent);
@@ -37,6 +38,7 @@ public class Rude8BallSetupActivity extends Activity {
 
 	}
 
+	@Override
 	protected void onStop() {
 		super.onStop();
 
