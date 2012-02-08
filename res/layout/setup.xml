@@ -45,7 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
+            android:layout_centerVertical="false"
+            android:layout_marginTop="310dp"
             android:text="Graphics"
             android:textColor="@color/black" />
 
@@ -78,16 +79,6 @@
             android:layout_alignLeft="@+id/textView6"
             android:text="Fimbah"
             android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/textView3"
-            android:layout_alignParentLeft="true"
-            android:text="@string/creditText"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/textView7"
@@ -107,6 +98,35 @@
             android:layout_alignLeft="@+id/textView6"
             android:text="Monz"
             android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView4"
+            android:layout_alignParentLeft="true"
+            android:text="@string/creditText"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/spinner1"
+            android:layout_marginTop="24dp"
+            android:text="@string/sound"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black" />
+
+        <CheckBox
+            android:id="@+id/checkBox1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textView9"
+            android:text="CheckBox" />
 
     </RelativeLayout>
 

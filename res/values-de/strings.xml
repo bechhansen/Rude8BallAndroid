@@ -4,6 +4,7 @@
     <string name="language_text">Sprache</string>
     <string name="creditText">Credits:</string>
     <string name="unableToServe">The rude 8 ball kann wirklich zu diesem Zeitpunkt nicht gestört werden!</string>
-    <string name="waitingToServe">Sie sind ein…</string>    
+    <string name="waitingToServe">Sie sind ein…</string>
+    <string name="sound">Stimme</string>    
 
 </resources>

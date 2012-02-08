@@ -11,5 +11,6 @@
     <string name="creditText">Credits:</string>
     <string name="unableToServe">The rude 8 ball can really not be bothered at this time!</string>
     <string name="waitingToServe">You are a…</string>
+    <string name="sound">Sound</string>
 
 </resources>

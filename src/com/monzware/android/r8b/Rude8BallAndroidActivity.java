@@ -10,6 +10,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 
 public class Rude8BallAndroidActivity extends Activity implements ShakeListener, ExtendableTimerListener {
 
+	private static final int SPEECH_DATA_CHECK_CODE = 100;
+
 	private SensorManager sensorMgr;
 
 	private ExtendableTimer timer = new ExtendableTimer(2000, 250, 250);
@@ -27,7 +30,9 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 	private TextView tv = null;
 	private ImageView button = null;
 
-	ShakeDetector sd = new ShakeDetector();
+	private ShakeDetector sd = new ShakeDetector();
+
+	private RudeTalker talker = new RudeTalker();
 
 	private String rudeComment;
 
@@ -72,6 +77,7 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 
 		});
 
+		initializeTalker();
 	}
 
 	@Override
@@ -94,6 +100,7 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 			SharedPreferences settings = getSharedPreferences(ConfigurationConstants.PREFS_NAME, 0);
 			String str = ConfigurationConstants.getLanguageString(settings.getInt(ConfigurationConstants.LANGUAGE, 0));
 			CrapNameTask crapNameTask = new CrapNameTask(str);
+			talker.setLanguage(str);
 			AsyncTask<Void, Integer, String> execute = crapNameTask.execute();
 			rudeComment = execute.get();
 		} catch (InterruptedException e) {
@@ -127,6 +134,8 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 					tv.setText(rudeComment);
 				}
 			});
+
+			talker.talk(rudeComment);
 
 		} else {
 
@@ -184,5 +193,41 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 		}
 		super.onResume();
 	}
+
+	/**
+	 * Is called when returned from the configuration dialog.
+	 */
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 0) {
+			initializeTalker();
+		} else if (requestCode == SPEECH_DATA_CHECK_CODE) {
+			if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {								
+				talker.enable(this);
+			} else {
+				talker.disable();
+			}
+		}
+	}
+
+	private void initializeTalker() {
+		// Restore preferences
+		SharedPreferences settings = getSharedPreferences(ConfigurationConstants.PREFS_NAME, 0);
+		boolean isSound = settings.getBoolean(ConfigurationConstants.SOUND, false);
+		if (isSound) {
+			Intent checkIntent = new Intent();
+			checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+			startActivityForResult(checkIntent, SPEECH_DATA_CHECK_CODE);
+		} else {
+			talker.disable();
+		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		talker.stop();
+		super.onDestroy();
+	}
+	
+	
 
 }
