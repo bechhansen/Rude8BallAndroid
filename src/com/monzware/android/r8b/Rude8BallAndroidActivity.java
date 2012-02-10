@@ -16,10 +16,18 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
+
 public class Rude8BallAndroidActivity extends Activity implements ShakeListener, ExtendableTimerListener {
+
+	private static final String ADD_KEY = "a14f34e2648253d";
 
 	private static final int SPEECH_DATA_CHECK_CODE = 100;
 
@@ -36,6 +44,8 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 
 	private String rudeComment;
 
+	private AdView adView;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -43,8 +53,8 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.main);
 
-		tv = (TextView) findViewById(R.id.textView1);
-		button = (ImageView) findViewById(R.id.imageView1);
+		tv = (TextView) findViewById(R.id.rudeText);
+		button = (ImageView) findViewById(R.id.ballImage);
 
 		timer.addExtendableTimerListener(this);
 
@@ -67,7 +77,7 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 			}
 		});
 
-		ImageView next = (ImageView) findViewById(R.id.imageView3);
+		ImageView next = (ImageView) findViewById(R.id.setupButton);
 		next.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -78,6 +88,18 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 		});
 
 		initializeTalker();
+
+		// Create the adView
+		adView = new AdView(this, AdSize.BANNER, ADD_KEY);
+
+		// LinearLayout layout = (LinearLayout) findViewById(R.id.add);
+		LinearLayout layout = (LinearLayout) findViewById(R.id.add);
+
+		// Add the adView to it
+		layout.addView(adView);
+
+		adView.loadAd(new AdRequest());
+
 	}
 
 	@Override
@@ -201,7 +223,7 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 		if (requestCode == 0) {
 			initializeTalker();
 		} else if (requestCode == SPEECH_DATA_CHECK_CODE) {
-			if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {								
+			if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
 				talker.enable(this);
 			} else {
 				talker.disable();
@@ -225,9 +247,8 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 	@Override
 	protected void onDestroy() {
 		talker.stop();
+		adView.destroy();
 		super.onDestroy();
 	}
-	
-	
 
 }

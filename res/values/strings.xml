@@ -2,10 +2,6 @@
 <resources>
 
     <string name="app_name">Rude 8 Ball</string>
-
-    <color name="white">#FFFFFF</color>
-    <color name="black">#000000</color>
-
     <string name="rudeText"></string>
     <string name="language_text">Language</string>
     <string name="creditText">Credits:</string>
