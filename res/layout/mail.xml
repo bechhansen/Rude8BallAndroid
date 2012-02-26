@@ -6,14 +6,6 @@
     android:background="@color/white"
     android:gravity="center_horizontal|clip_horizontal|left"
     android:orientation="vertical" >
-    
-     <LinearLayout
-        android:id="@+id/add"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        android:background="@color/white"
-        android:orientation="vertical" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
@@ -31,50 +23,32 @@
             android:background="@color/white"
             android:src="@drawable/ball8" />
     </RelativeLayout>
-
+
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="fill_horizontal"
         android:background="@color/white"
-        android:gravity="center_vertical" >
+        android:gravity="top" >
 
         <ImageView
             android:id="@+id/textBoxButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@color/white"
-            android:src="@drawable/noteresized" />
-
-        <ImageView
-            android:id="@+id/setupButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_menu_manage" />
+            android:layout_alignParentTop="true"
+            android:background="@color/white"
+            android:src="@drawable/noteresizedmail" />
 
         <TextView
-            android:id="@+id/rudeText"
+            android:id="@+id/rudeMailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/black" />
-
-        <ImageView
-            android:id="@+id/mailButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/rudeText"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_action_mail" />
-        
     </RelativeLayout>
 
 </LinearLayout>

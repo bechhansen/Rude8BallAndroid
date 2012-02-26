@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   
+
     <string name="language_text">Sprache</string>
     <string name="creditText">Credits:</string>
     <string name="unableToServe">The rude 8 ball kann wirklich zu diesem Zeitpunkt nicht gestört werden!</string>
     <string name="waitingToServe">Sie sind ein…</string>
-    <string name="sound">Stimme</string>    
+    <string name="sound">Stimme</string>
+    <string name="mailTitle">The rude 8-ball  haben Neuigkeiten für Sie!!</string>
+    <string name="mailText">Hören Sie sich die weisen Worte des rude 8 ball\r\n\r\n\r\nhttps://market.android.com/details?id=com.monzware.android.r8b\r\n\r\n</string>
+    <string name="mailYouAre">Sie sind ein</string>
+    <string name="mailNotRude">The Rude 8 ball habe nicht ER Scheibe noch.</string>
+    <string name="mailNotExternal">Datei kann nicht gespeichert</string>
 
 </resources>

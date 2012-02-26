@@ -45,6 +45,15 @@ public class RudeTalker implements OnInitListener {
 		}
 	}
 
+	public boolean talkToFile(String rudeComment, String fileName) {
+		if (enabled) {
+			rudeComment = fix(rudeComment);
+			textToSpeech.setLanguage(language);
+			return TextToSpeech.SUCCESS == textToSpeech.synthesizeToFile(rudeComment, null, fileName);
+		}
+		return true;
+	}
+
 	private String fix(String rudeComment) {
 		return rudeComment.toLowerCase().replace("f**k", "fuck");
 	}
@@ -57,5 +66,9 @@ public class RudeTalker implements OnInitListener {
 
 	public void disable() {
 		enabled = false;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
 	}
 }

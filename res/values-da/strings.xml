@@ -6,5 +6,10 @@
     <string name="unableToServe">The rude 8 ball kan virkelige ikke tage sig af din anmodning nu!</string>
     <string name="waitingToServe">Du er en…</string>
     <string name="sound">Lyd</string>
+    <string name="mailTitle">The rude 8-ball har nyheder til dig!</string>
+    <string name="mailText">Lyt til de vise ord fra The rude 8 ball\r\n\r\n\r\nhttps://market.android.com/details?id=com.monzware.android.r8b\r\n\r\n</string>
+    <string name="mailYouAre">Du er en</string>
+    <string name="mailNotRude">The Rude 8 har ikke været ubehøvlet endnu.\r\n Ryst kuglen tosse!</string>
+    <string name="mailNotExternal">The Rude 8 ball kan ikke skrive til filsystemet. Hvordan har du så tænk dig den skal kunne sende mails hva\'?</string>
 
 </resources>

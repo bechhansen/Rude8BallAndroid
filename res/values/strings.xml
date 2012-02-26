@@ -2,11 +2,18 @@
 <resources>
 
     <string name="app_name">Rude 8 Ball</string>
+    <string name="mailMP3Filename">/Rude8Ball.mp3</string>
+    <string name="maiImageFilename">/Rude8Ball.png</string>
     <string name="rudeText"></string>
     <string name="language_text">Language</string>
     <string name="creditText">Credits:</string>
     <string name="unableToServe">The rude 8 ball can really not be bothered at this time!</string>
     <string name="waitingToServe">You are a…</string>
     <string name="sound">Sound</string>
+    <string name="mailTitle">The rude 8-ball has news for you!</string>
+    <string name="mailText">Behold the wise words of the rude 8 ball\r\n\r\n\r\nhttps://market.android.com/details?id=com.monzware.android.r8b\r\n\r\n</string>
+    <string name="mailYouAre">You\'re a</string>
+    <string name="mailNotRude">The Rude 8 ball haven\'t been rude yet.\r\n Shake it stupid!</string>
+    <string name="mailNotExternal">The Rude 8 ball can\'t write to external storage so how should it able to send mail stupid?</string>
 
 </resources>

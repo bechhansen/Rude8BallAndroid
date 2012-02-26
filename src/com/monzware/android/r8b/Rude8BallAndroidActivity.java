@@ -1,23 +1,32 @@
 package com.monzware.android.r8b;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Parcelable;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +39,7 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 	private static final String ADD_KEY = "a14f34e2648253d";
 
 	private static final int SPEECH_DATA_CHECK_CODE = 100;
+	private static final int MAIL_CODE = 101;
 
 	private SensorManager sensorMgr;
 
@@ -87,12 +97,76 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 
 		});
 
+		ImageView mailButton = (ImageView) findViewById(R.id.mailButton);
+		mailButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+				if (rudeComment == null) {
+					Toast.makeText(getApplicationContext(), R.string.mailNotRude, Toast.LENGTH_LONG).show();
+					return;
+				}
+
+				if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+					Toast.makeText(getApplicationContext(), R.string.mailNotExternal, Toast.LENGTH_LONG).show();
+					return;
+				}
+
+				try {
+					File file = Environment.getExternalStorageDirectory();
+
+					LayoutInflater inflater = getLayoutInflater();
+
+					View mailView = inflater.inflate(R.layout.mail, null);
+					TextView rudeMailText = (TextView) mailView.findViewById(R.id.rudeMailText);
+					rudeMailText.setText(getString(R.string.mailYouAre) + " " + rudeComment);
+
+					mailView.measure(410, 350);
+					mailView.layout(0, 0, 410, 350);
+
+					final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND_MULTIPLE);
+
+					emailIntent.setType("plain/text");
+
+					String title = getString(R.string.mailTitle);
+					String text = getString(R.string.mailText);
+
+					ArrayList<Parcelable> uris = new ArrayList<Parcelable>();
+
+					String imageFileName = file.getAbsolutePath() + getString(R.string.maiImageFilename);
+
+					Bitmap b = Bitmap.createBitmap(mailView.getWidth(), mailView.getHeight(), Bitmap.Config.ARGB_8888);
+					Canvas c = new Canvas(b);
+					mailView.draw(c);
+					FileOutputStream out = new FileOutputStream(imageFileName);
+					b.compress(Bitmap.CompressFormat.PNG, 90, out);
+
+					uris.add(Uri.parse("file://" + imageFileName));
+
+					if (talker.isEnabled()) {
+						String mp3Filename = file.getAbsolutePath() + getString(R.string.mailMP3Filename);
+						talker.talkToFile(rudeComment, mp3Filename);
+						uris.add(Uri.parse("file://" + mp3Filename));
+					}
+
+					emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, title);
+					emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, text);
+					emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+
+					startActivityForResult(Intent.createChooser(emailIntent, text), MAIL_CODE);
+
+				} catch (Exception e) {
+					Log.e("", "Error", e);
+				}
+			}
+
+		});
+
 		initializeTalker();
 
 		// Create the adView
 		adView = new AdView(this, AdSize.BANNER, ADD_KEY);
 
-		// LinearLayout layout = (LinearLayout) findViewById(R.id.add);
 		LinearLayout layout = (LinearLayout) findViewById(R.id.add);
 
 		// Add the adView to it
@@ -228,6 +302,17 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 			} else {
 				talker.disable();
 			}
+		} else if (requestCode == MAIL_CODE) {
+			// Delete files
+			File file = Environment.getExternalStorageDirectory();
+			String mp3Filename = file.getAbsolutePath() + getString(R.string.mailMP3Filename);
+			String imageFileName = file.getAbsolutePath() + getString(R.string.maiImageFilename);
+
+			File mp3File = new File(mp3Filename);
+			mp3File.delete();
+
+			File imagefile = new File(imageFileName);
+			imagefile.delete();
 		}
 	}
 
