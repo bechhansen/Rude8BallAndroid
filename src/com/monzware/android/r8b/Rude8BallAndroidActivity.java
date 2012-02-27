@@ -270,6 +270,21 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 	@Override
 	public void finish() {
 		sensorMgr.unregisterListener(sd);
+
+		if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+
+			// Delete files
+			File file = Environment.getExternalStorageDirectory();
+			String mp3Filename = file.getAbsolutePath() + getString(R.string.mailMP3Filename);
+			String imageFileName = file.getAbsolutePath() + getString(R.string.maiImageFilename);
+
+			File mp3File = new File(mp3Filename);
+			mp3File.delete();
+
+			File imagefile = new File(imageFileName);
+			imagefile.delete();
+		}
+
 		super.finish();
 	}
 
@@ -304,15 +319,16 @@ public class Rude8BallAndroidActivity extends Activity implements ShakeListener,
 			}
 		} else if (requestCode == MAIL_CODE) {
 			// Delete files
-			File file = Environment.getExternalStorageDirectory();
-			String mp3Filename = file.getAbsolutePath() + getString(R.string.mailMP3Filename);
-			String imageFileName = file.getAbsolutePath() + getString(R.string.maiImageFilename);
-
-			File mp3File = new File(mp3Filename);
-			mp3File.delete();
-
-			File imagefile = new File(imageFileName);
-			imagefile.delete();
+			/*
+			 * File file = Environment.getExternalStorageDirectory(); String
+			 * mp3Filename = file.getAbsolutePath() +
+			 * getString(R.string.mailMP3Filename); String imageFileName =
+			 * file.getAbsolutePath() + getString(R.string.maiImageFilename);
+			 * 
+			 * File mp3File = new File(mp3Filename); mp3File.delete();
+			 * 
+			 * File imagefile = new File(imageFileName); imagefile.delete();
+			 */
 		}
 	}
 
