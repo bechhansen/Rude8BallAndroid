@@ -45,13 +45,13 @@ public final class R {
         public static final int spinner1=0x7f07000b;
         public static final int textBoxButton=0x7f070004;
         public static final int textView1=0x7f07000c;
-        public static final int textView2=0x7f070013;
+        public static final int textView2=0x7f070012;
         public static final int textView3=0x7f07000d;
-        public static final int textView4=0x7f070010;
+        public static final int textView4=0x7f070013;
         public static final int textView5=0x7f07000e;
-        public static final int textView6=0x7f07000f;
-        public static final int textView7=0x7f070011;
-        public static final int textView8=0x7f070012;
+        public static final int textView6=0x7f070011;
+        public static final int textView7=0x7f07000f;
+        public static final int textView8=0x7f070010;
         public static final int textView9=0x7f070014;
     }
     public static final class layout {

@@ -36,7 +36,7 @@ import com.google.ads.AdView;
 
 public class Rude8BallAndroidActivity extends Activity implements ShakeListener, ExtendableTimerListener {
 
-	private static final String ADD_KEY = "a14f34e2648253d";
+	public static final String ADD_KEY = "a14f34e2648253d";
 
 	private static final int SPEECH_DATA_CHECK_CODE = 100;
 	private static final int MAIL_CODE = 101;

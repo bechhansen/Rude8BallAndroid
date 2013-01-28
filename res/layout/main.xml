@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/white"
     android:gravity="center_horizontal|clip_horizontal|left"
@@ -12,12 +12,12 @@
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
-        android:background="@color/white"
+        android:background="@color/black"
         android:orientation="vertical" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
         <ImageButton
@@ -31,7 +31,10 @@
             android:background="@color/white"
             android:src="@drawable/ball8" />
     </RelativeLayout>
-
+
+
+
+
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"

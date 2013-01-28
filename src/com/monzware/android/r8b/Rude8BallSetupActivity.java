@@ -1,5 +1,9 @@
 package com.monzware.android.r8b;
 
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +13,7 @@ import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 public class Rude8BallSetupActivity extends Activity {
@@ -76,6 +81,16 @@ public class Rude8BallSetupActivity extends Activity {
 
 		boolean isSound = settings.getBoolean(ConfigurationConstants.SOUND, false);
 		sound.setChecked(isSound);
+		
+		// Create the adView
+		AdView adView = new AdView(this, AdSize.BANNER, Rude8BallAndroidActivity.ADD_KEY);
+
+		LinearLayout layout = (LinearLayout) findViewById(R.id.add);
+
+		// Add the adView to it
+		layout.addView(adView);
+
+		adView.loadAd(new AdRequest());
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
